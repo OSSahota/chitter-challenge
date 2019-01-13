@@ -1,5 +1,5 @@
-feature 'User signing up' do
-  scenario 'User signs up first time' do
+feature 'Creating user account' do
+  scenario 'User signs up for the first time' do
     visit '/'
     click_on 'Sign up' # to get to sign up page
     fill_in :email, with: 'firstuser@makers.com'
@@ -8,5 +8,7 @@ feature 'User signing up' do
     fill_in :username, with: 'userf'
     click_on 'Sign up' # to submit user details
     expect(current_path).to eq '/profile'
+    expect(page).to have_content 'Welcome first user'
   end
+
 end

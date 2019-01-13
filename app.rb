@@ -1,5 +1,6 @@
 require 'sinatra'
 require 'sinatra/activerecord'
+require './lib/account'
 
 class App < Sinatra::Base
   enable :sessions
@@ -8,21 +9,24 @@ class App < Sinatra::Base
     erb :index
   end
 
-  get '/user_signup' do
-    erb :user_signup
+  get '/account_signup' do
+    erb :account_signup
   end
 
-  post '/user_signup' do
-    session[:email] = params[:email]
-    session[:password] = params[:password]
-    session[:name] = params[:name]
-    session[:username] = params[:username]
-    # p params
-    # p session
+  post '/account_signup' do
+    # session[:email] = params[:email]
+    # session[:password] = params[:password]
+    # session[:name] = params[:name]
+    # session[:username] = params[:username]
+
+    session[:account] = Account.create(email: params[:email], password:
+      params[:password], name: params[:name], username: params[:username])
+
     redirect :profile
   end
 
   get '/profile' do
+    @name = session[:account].name
     erb :profile
   end
 

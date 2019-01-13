@@ -1,6 +1,14 @@
 Profile Page
 <br>
 <br>
+Welcome <%= @name %>
+<br>
+<br>
+<div>
+  <form action="/peep_view">
+    <input type="submit" value="View Peeps">
+  </form>
+</div>
 <div>
   <form action="/peep_new">
     <input type="submit" value="New Peep">
