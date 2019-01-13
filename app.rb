@@ -17,9 +17,9 @@ class App < Sinatra::Base
     session[:password] = params[:password]
     session[:name] = params[:name]
     session[:username] = params[:username]
-    p params
+    # p params
     # p session
-    erb :profile
+    redirect :profile
   end
 
   get '/profile' do

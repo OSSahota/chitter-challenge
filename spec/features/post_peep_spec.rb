@@ -5,10 +5,10 @@ feature 'Posting a peep' do
     click_on 'New Peep'
     expect(current_path).to eq '/peep_new'
     fill_in 'peep', with: 'first peep'
-    fill_in 'name', with: 'first user'
-    fill_in 'username', with: 'userf'
+    # fill_in 'name', with: 'first user'
+    # fill_in 'username', with: 'userf'
     click_on 'Post Peep'
     expect(current_path).to eq '/peep_view'
-    expect(page).to have_content('first user - userf - first peep')
+    expect(page).to have_content('first peep')
  end
 end
