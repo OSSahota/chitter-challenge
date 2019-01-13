@@ -8,13 +8,32 @@ class App < Sinatra::Base
     erb :index
   end
 
+  get '/user_signup' do
+    erb :user_signup
+  end
+
+  post '/user_signup' do
+    session[:email] = params[:email]
+    session[:password] = params[:password]
+    session[:name] = params[:name]
+    session[:username] = params[:username]
+    p params
+    # p session
+    erb :profile
+  end
+
+  get '/profile' do
+    erb :profile
+  end
+
   get '/peep_new' do
     erb :peep_new
   end
 
   post '/peep_post' do
     session[:peep] = params[:peep]
-    session[:user] = params[:user]
+    # session[:name] = params[:name]
+    # session[:username] = params[:username]
     # p params
     # p session
     redirect '/peep_view'
@@ -22,7 +41,8 @@ class App < Sinatra::Base
 
   get '/peep_view' do
     @peep = session[:peep]
-    @user = session[:user]
+    @name = session[:name]
+    @username = session[:username]
     erb :peep_view
   end
 end

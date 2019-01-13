@@ -1,12 +1,14 @@
 feature 'Posting a peep' do
   scenario 'User posts a new peep' do
-    visit '/'
+
+    visit '/profile'
     click_on 'New Peep'
-    visit '/peep_new'
-    fill_in 'peep', with: 'First peep'
-    fill_in 'user', with: 'User A'
+    expect(current_path).to eq '/peep_new'
+    fill_in 'peep', with: 'first peep'
+    fill_in 'name', with: 'first user'
+    fill_in 'username', with: 'userf'
     click_on 'Post Peep'
     expect(current_path).to eq '/peep_view'
-    expect(page).to have_content('User A - First peep')
+    expect(page).to have_content('first user - userf - first peep')
  end
 end
