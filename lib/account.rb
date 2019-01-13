@@ -4,6 +4,8 @@ require 'sinatra/activerecord'
 class Account < ActiveRecord::Base
   self.table_name = "account"
 
+  has_many :peeps
+
   validates :email, :presence => true
   validates :email, :uniqueness => { :message => "This email already exists" }
 

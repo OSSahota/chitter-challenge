@@ -1,1 +1,12 @@
-<%= @name %> - <%= @username %> - <%= @peep %>
+Peeps
+<br>
+<br>
+<% @peep.reverse.each do |peep| %>
+ID: <%= peep.id %> - <%= peep.created_at.strftime('%d-%m-%Y %H:%M:%S') %> --> <%= peep.text %>
+<br>
+<% end %>
+<br>
+  <form action="/peep_new">
+    <input type="submit" value="New Peep">
+  </form>
+</div>

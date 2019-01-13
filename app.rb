@@ -1,9 +1,11 @@
 require 'sinatra'
 require 'sinatra/activerecord'
 require './lib/account'
+require './lib/peep'
 
 class App < Sinatra::Base
   enable :sessions
+  # set :method_override, true
 
   get '/' do
     erb :index
@@ -14,11 +16,6 @@ class App < Sinatra::Base
   end
 
   post '/account_signup' do
-    # session[:email] = params[:email]
-    # session[:password] = params[:password]
-    # session[:name] = params[:name]
-    # session[:username] = params[:username]
-
     session[:account] = Account.create(email: params[:email], password:
       params[:password], name: params[:name], username: params[:username])
 
@@ -26,7 +23,8 @@ class App < Sinatra::Base
   end
 
   get '/profile' do
-    @name = session[:account].name
+    @account = session[:account]
+
     erb :profile
   end
 
@@ -35,18 +33,16 @@ class App < Sinatra::Base
   end
 
   post '/peep_post' do
-    session[:peep] = params[:peep]
-    # session[:name] = params[:name]
-    # session[:username] = params[:username]
-    # p params
-    # p session
+    session[:peep] = Peep.create(text: params[:peep])
+
     redirect '/peep_view'
   end
 
   get '/peep_view' do
-    @peep = session[:peep]
-    @name = session[:name]
-    @username = session[:username]
+    @account = Account.all
+    @peep = Peep.all
+
     erb :peep_view
   end
+
 end
