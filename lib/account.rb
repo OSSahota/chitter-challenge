@@ -4,8 +4,6 @@ require 'sinatra/activerecord'
 class Account < ActiveRecord::Base
   self.table_name = "account"
 
-  has_many :peeps
-
   validates :email, :presence => true
   validates :email, :uniqueness => { :message => "This email already exists" }
 
@@ -15,5 +13,18 @@ class Account < ActiveRecord::Base
 
   validates :username, :presence => true
   validates :username, :uniqueness => { :message => "This username already exists" }
+
+  has_many :peeps
+
+  def self.authenticate(email, password)
+    user = find_by(email: email)
+    return nil unless user
+
+    if user.password == password
+      user
+    else
+      nil
+    end
+  end
 
 end

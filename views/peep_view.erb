@@ -6,7 +6,13 @@ ID: <%= peep.id %> - <%= peep.created_at.strftime('%d-%m-%Y %H:%M:%S') %> --> <%
 <br>
 <% end %>
 <br>
+<div>
   <form action="/peep_new">
     <input type="submit" value="New Peep">
+  </form>
+</div>
+<div>
+  <form action="/profile">
+    <input type="submit" value="View Profile">
   </form>
 </div>
